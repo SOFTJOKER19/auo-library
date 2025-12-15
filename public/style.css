@@ -1,0 +1,29 @@
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:white;
+  font-family:Arial,sans-serif;
+  color:#fff;
+}
+.auth-card{
+  background:green;
+  padding:30px;
+  width:350px;
+  border-radius:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  border:none;
+}
+input{background:#1f1f23;color:#fff;}
+button{background:#fff;color:#000;font-weight:bold;cursor:pointer;}
+.hidden{display:none;}
+.switch{text-align:center;margin-top:16px;}
+.switch button{background:none;color:#fff;text-decoration:underline;}

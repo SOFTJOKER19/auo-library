@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <h1>AUO Library</h1>
+  <p id="welcome"></p>
+
+  <div class="grid">
+    <div class="book">Atomic Habits</div>
+    <div class="book">Rich Dad Poor Dad</div>
+    <div class="book">The Psychology of Money</div>
+    <div class="book">Clean Code</div>
+  </div>
+
+  <button onclick="logout()">Logout</button>
+
+<script>
+  const user = localStorage.getItem('currentUser');
+  if (!user) location.href = 'index.html';
+  document.getElementById('welcome').textContent = 'Welcome, ' + user;
+
+  function logout(){
+    localStorage.removeItem('currentUser');
+    location.href = 'index.html';
+  }
+</script>
+</body>
+</html>
