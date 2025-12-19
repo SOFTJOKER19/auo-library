@@ -1,50 +1,83 @@
-// DOM elements
-const toggleBtn = document.getElementById('toggleBtn');
-const authForm = document.getElementById('authForm');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const title = document.getElementById('title');
-const subtitle = document.getElementById('subtitle');
-const submitBtn = document.getElementById('submitBtn');
-const switchText = document.getElementById('switchText');
+// ===== DOM ELEMENTS =====
+const toggleBtn = document.getElementById("toggleBtn");
+const authForm = document.getElementById("authForm");
+const matricInput = document.getElementById("Matric");
+const passwordInput = document.getElementById("password");
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const submitBtn = document.getElementById("submitBtn");
+const switchText = document.getElementById("switchText");
 
-let mode = 'login';
-let users = JSON.parse(localStorage.getItem('users')) || [];
+// ===== STATE =====
+let mode = "login";
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// Toggle Login / Signup
-toggleBtn.addEventListener('click', () => {
-  mode = mode === 'login' ? 'signup' : 'login';
+// ===== TOGGLE LOGIN / SIGNUP =====
+toggleBtn.addEventListener("click", () => {
+  mode = mode === "login" ? "signup" : "login";
 
-  nameInput.classList.toggle('hidden');
-  title.textContent = mode === 'login' ? 'Welcome Back' : 'Create Account';
-  subtitle.textContent = mode === 'login' ? 'Login to continue' : 'Sign up to get started';
-  submitBtn.textContent = mode === 'login' ? 'Login' : 'Sign Up';
-  switchText.textContent = mode === 'login' ? 'Don’t have an account?' : 'Already have an account?';
-  toggleBtn.textContent = mode === 'login' ? 'Sign up' : 'Login';
+  title.textContent =
+    mode === "login" ? "Welcome Back" : "Create Account";
+
+  subtitle.textContent =
+    mode === "login"
+      ? "Login with your matric number"
+      : "Sign up using your matric number";
+
+  submitBtn.textContent = mode === "login" ? "Login" : "Sign Up";
+
+  switchText.textContent =
+    mode === "login"
+      ? "Don’t have an account?"
+      : "Already have an account?";
+
+  toggleBtn.textContent = mode === "login" ? "Sign up" : "Login";
 });
 
-// Handle Auth
-authForm.addEventListener('submit', (e) => {
+// ===== AUTH HANDLER =====
+authForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const email = emailInput.value.trim();
+  const matric = matricInput.value.trim();
   const password = passwordInput.value.trim();
-  const name = nameInput.value.trim();
 
-  if (mode === 'signup') {
-    if (!name) return alert('Enter your name');
-    if (users.find(u => u.email === email)) return alert('Account already exists');
+  if (!matric || !password) {
+    alert("Matric number and password are required");
+    return;
+  }
 
-    users.push({ name, email, password });
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem('currentUser', email);
-    location.href = 'dashboard.html';
+  if (mode === "signup") {
+    // Check if matric already exists
+    const exists = users.find((u) => u.matric === matric);
+    if (exists) {
+      alert("This matric number is already registered");
+      return;
+    }
+
+    // Create new account
+    const newUser = {
+      matric,
+      password,
+      createdAt: new Date().toISOString()
+    };
+
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", matric);
+
+    window.location.href = "dashboard.html";
   } else {
-    const user = users.find(u => u.email === email && u.password === password);
-    if (!user) return alert('Invalid credentials');
+    // Login
+    const user = users.find(
+      (u) => u.matric === matric && u.password === password
+    );
 
-    localStorage.setItem('currentUser', email);
-    location.href = 'dashboard.html';
+    if (!user) {
+      alert("Invalid matric number or password");
+      return;
+    }
+
+    localStorage.setItem("currentUser", matric);
+    window.location.href = "dashboard.html";
   }
 });

@@ -6,22 +6,30 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="auth-card">
-    <h1 id="title">Welcome Back</h1>
-    <p id="subtitle">Login to continue</p>
+  <form id="authForm">
+  <h1 id="title">Welcome Back</h1>
+  <p id="subtitle">Login with your matric number</p>
 
-    <form id="authForm">
-      <input id="name" placeholder="Full Name" class="hidden">
-      <input id="email" type="email" placeholder="Email" required>
-      <input id="password" type="password" placeholder="Password" required>
-      <button id="submitBtn">Login</button>
-    </form>
+  <input
+    type="text"
+    id="Matric"
+    placeholder="Matric Number"
+    required
+  />
 
-    <p class="switch">
-      <span id="switchText">Don’t have an account?</span>
-      <button type="button" id="toggleBtn">Sign up</button>
-    </p>
-  </div>
+  <input
+    type="password"
+    id="password"
+    placeholder="Password"
+    required
+  />
+
+  <button type="submit" id="submitBtn">Login</button>
+
+  <p id="switchText">Don’t have an account?</p>
+  <button type="button" id="toggleBtn">Sign up</button>
+</form>
+
 
   <script src="script.js"></script>
 </body>

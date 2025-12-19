@@ -18,14 +18,19 @@
   <button onclick="logout()">Logout</button>
 
 <script>
-  const user = localStorage.getItem('currentUser');
-  if (!user) location.href = 'index.html';
-  document.getElementById('welcome').textContent = 'Welcome, ' + user;
+ // Get logged in user
+const matric = localStorage.getItem("currentUser");
 
-  function logout(){
-    localStorage.removeItem('currentUser');
-    location.href = 'index.html';
-  }
+if (!matric) {
+  window.location.href = "login.html";
+}
+
+// Display matric on dashboard
+document.getElementById("userMatric").textContent = matric;
+
+
+
+
 </script>
 </body>
 </html>
