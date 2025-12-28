@@ -133,7 +133,7 @@ button{
 
   <input type="file" id="bookFile" accept="application/pdf">
   <input id="bookTitle" placeholder="Book Title">
-  <button id="uploadBtn">Upload PDF</button>
+  <button id="uploadBtn">Upload Book</button>
 
   <div class="books" id="books"></div>
 </div>
@@ -225,7 +225,7 @@ function renderBooks(){
     booksDiv.innerHTML += `
       <div class="book">
         <h4>${b.title}</h4>
-        <a href="${b.data}" download>Download PDF</a>
+        <a href="${b.data}" download>Download Book</a>
       </div>`;
   });
 }
