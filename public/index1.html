@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>eLibrary</title>
+<title>GreenVault | eLibrary</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -12,16 +12,144 @@
   --card:white;
   --accent:green;
   --glass:rgba(255,255,255,.08);
+  --dark:#0b1f16;
+  --bg:radial-gradient(circle at top,#eafff5,#f4fff9);
 }
 
-*{box-sizing:border-box;font-family:Inter,Segoe UI,sans-serif}
+*{box-sizing:border-box;font-family:Inter,sans-serif}
 
 body{
   margin:0;
-  min-height:100vh;
   background:linear-gradient(180deg,var(--purple1),var(--purple2));
-  color:black;
+  color:#0a0a0a;
+   min-height:100vh;
+  overflow-x:hidden;
 }
+
+/* SMOOTH SCROLL */
+html{scroll-behavior:smooth}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--green),#0fa968);
+  border-radius:10px;
+}
+
+/* HEADER */
+header{
+  padding:30px 20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+header h1{
+  font-size:32px;
+  font-weight:800;
+}
+
+header span{color:var(--green)}
+
+/* GRID */
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  transform-style:preserve-3d;
+  transition:transform .3s ease, box-shadow .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+/* GLOW */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(22,199,132,.25),transparent 60%);
+  opacity:0;
+  transition:.3s;
+}
+
+.card:hover::after{opacity:1}
+
+/* TILT */
+.card:hover{
+  box-shadow:0 30px 60px rgba(0,0,0,.15);
+}
+
+/* ICON */
+.icon{
+  font-size:36px;
+  color:var(--green);
+  margin-bottom:12px;
+}
+
+/* TEXT */
+.card h3{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.card p{
+  font-size:14px;
+  opacity:.7;
+  margin:8px 0 18px;
+}
+
+/* BUTTON */
+.card a{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--green),#0fa968);
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* ANIMATION */
+.fade{
+  animation:fadeUp .7s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+
+/* MOBILE NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:14px 0;
+  box-shadow:0 -10px 30px rgba(0,0,0,.1);
+}
+
+.nav span{
+  font-weight:600;
+  cursor:pointer;
+}
+
+.nav .active{color:var(--green)}
+
 
 /* AUTH */
 .auth{
@@ -113,6 +241,8 @@ button{
 <body>
 
 <!-- AUTH -->
+ <center>
+ <img src="auo-removebg-preview.png" width="280px"></center>
 <div class="auth" id="authBox">
   <h2 id="authTitle">Login</h2>
 
@@ -130,13 +260,63 @@ button{
     <h2>Welcome, <span id="userName"></span></h2>
     <button class="logout" onclick="logout()">Logout</button>
   </div>
+<header class="fade">
+  <h1>Hi</h1>
+  <p>Welcome back to Achievers University Library</p>
+</header>
 
-  <input type="file" id="bookFile" accept="application/pdf">
-  <input id="bookTitle" placeholder="Book Title">
-  <button id="uploadBtn">Upload Book</button>
+<section class="grid">
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Borrow a Book</h3>
+    <p>Request physical books easily</p>
+    <a href="#">Borrow</a>
+  </div>
 
-  <div class="books" id="books"></div>
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>E-Library</h3>
+    <p>Read & download PDFs instantly</p>
+    <a href="#">Open</a>
+  </div>
+
+  <div class="card fade">
+    <div class="icon">🔍</div>
+    <h3>Find a Book</h3>
+    <p>Search by title or author</p>
+    <a href="#">Search</a>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Borrow History</h3>
+    <p>Track requests & due dates</p>
+    <a href="#">View</a>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Wishlist</h3>
+    <p>Save books for later</p>
+    <a href="#">Open</a>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Feedback</h3>
+    <p>Help improve the platform</p>
+    <a href="#">Send</a>
+  </div>
+</section>
+
+<!-- MOBILE NAV -->
+<div class="nav">
+  <span class="active">Home</span>
+  <span>Library</span>
+  <span>Profile</span>
 </div>
+
+ 
 
 <script>
 /* ELEMENTS */
@@ -225,7 +405,7 @@ function renderBooks(){
     booksDiv.innerHTML += `
       <div class="book">
         <h4>${b.title}</h4>
-        <a href="${b.data}" download>Download Book</a>
+        <a href="${b.data}" download>Download PDF</a>
       </div>`;
   });
 }
