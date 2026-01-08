@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GreenVault | eLibrary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --purple1:white;
+  --purple2:green;
+  --card:white;
+  --accent:green;
+  --glass:rgba(255,255,255,.08);
+  --dark:#0b1f16;
+  --bg:radial-gradient(circle at top,#eafff5,#f4fff9);
+}
+
+*{box-sizing:border-box;font-family:Inter,sans-serif}
+
+body{
+  margin:0;
+  background:linear-gradient(180deg,var(--purple1),var(--purple2));
+  color:#0a0a0a;
+   min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* SMOOTH SCROLL */
+html{scroll-behavior:smooth}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--green),#0fa968);
+  border-radius:10px;
+}
+
+/* HEADER */
+header{
+  padding:30px 20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+header h1{
+  font-size:32px;
+  font-weight:800;
+}
+
+header span{color:var(--green)}
+
+/* GRID */
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  transform-style:preserve-3d;
+  transition:transform .3s ease, box-shadow .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+/* GLOW */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(22,199,132,.25),transparent 60%);
+  opacity:0;
+  transition:.3s;
+}
+
+.card:hover::after{opacity:1}
+
+/* TILT */
+.card:hover{
+  box-shadow:0 30px 60px rgba(0,0,0,.15);
+}
+
+/* ICON */
+.icon{
+  font-size:36px;
+  color:var(--green);
+  margin-bottom:12px;
+}
+
+/* TEXT */
+.card h3{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.card p{
+  font-size:14px;
+  opacity:.7;
+  margin:8px 0 18px;
+}
+
+/* BUTTON */
+.card a{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--green),#0fa968);
+  color:white;
+  text-decoration:none;
+  align-items: center;
+  font-weight:600;
+}
+
+/* ANIMATION */
+.fade{
+  animation:fadeUp .7s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+
+/* MOBILE NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:14px 0;
+  box-shadow:0 -10px 30px rgba(0,0,0,.1);
+}
+
+.nav span{
+  font-weight:600;
+  cursor:pointer;
+}
+
+.nav .active{color:var(--green)}
+
+
+/* AUTH */
+.auth{
+  max-width:420px;
+  margin:80px auto;
+  padding:30px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border-radius:20px;
+}
+
+.auth h2{text-align:center}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:14px;
+  border:none;
+  background:#1f1440;
+  color:#fff;
+}
+
+button{
+  width:50%;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:var(--accent);
+  color:white;
+  font-weight:600;
+  align-items: center;
+  cursor:pointer;
+}
+
+.toggle{text-align:center;margin-top:12px;opacity:.8;cursor:pointer}
+
+/* LIBRARY */
+.library{
+  display:none;
+  padding:25px;
+}
+
+.header{
+  font-size:24px;
+  margin-bottom:20px;
+}
+
+.collections{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+}
+
+.collection{
+  background:var(--card);
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.collection h4{margin:0 0 8px 0}
+
+.upload{
+  margin:30px 0;
+  background:var(--glass);
+  padding:20px;
+  border-radius:18px;
+}
+
+.books{
+  margin-top:20px;
+  display:grid;
+  gap:12px;
+}
+
+.book{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.book a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<!-- AUTH -->
+ <center>
+ <img src="auo-removebg-preview.png" width="280px"></center>
+<div class="auth" id="authBox">
+  <h2 id="authTitle">Login</h2>
+
+  <input id="nameInput" placeholder="Full Name" style="display:none">
+  <input id="matricInput" placeholder="Matric Number">
+  <input id="passwordInput" type="password" placeholder="Password">
+
+  <button id="authBtn">Continue</button>
+  <div class="toggle" id="toggleMode">Create an account</div>
+</div>
+
+<!-- LIBRARY -->
+<div class="library" id="libraryPage">
+  <div class="header">
+    <h2>Welcome, <span id="userName"></span></h2>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+<header class="fade">
+  <h1>Hi</h1>
+  <p>Welcome back to Achievers University Library</p>
+</header>
+
+<section class="grid">
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Borrow a Book</h3>
+    <p>Request physical books easily</p>
+   <button><a href="#">Borrow</a></button>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>E-Library</h3>
+    <p>Read & download PDFs instantly</p>
+    <button><a href="#">Open</a></button>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Find a Book</h3>
+    <p>Search by title or author</p>
+   <button> <a href="#">Search</a></button>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Borrow History</h3>
+    <p>Track requests & due dates</p>
+    
+    <button><a href="#">View</a></button>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Wishlist</h3>
+    <p>Save books for later</p>
+    <button><a href="#">Open</a></button>
+  </div>
+
+  <div class="card fade">
+    <div class="icon"></div>
+    <h3>Feedback</h3>
+    <p>Help improve the platform</p>
+   <button> <a href="#">Send</a></button>
+  </div>
+</section>
+
+<!-- MOBILE NAV -->
+<div class="nav">
+  <span class="active">Home</span>
+  <span>Library</span>
+  <span>Profile</span>
+</div>
+
+ 
+
+<script>
+/* ELEMENTS */
+const authBox = document.getElementById("authBox");
+const libraryPage = document.getElementById("libraryPage");
+const authTitle = document.getElementById("authTitle");
+const nameInput = document.getElementById("nameInput");
+const matricInput = document.getElementById("matricInput");
+const passwordInput = document.getElementById("passwordInput");
+const toggleMode = document.getElementById("toggleMode");
+const authBtn = document.getElementById("authBtn");
+const userName = document.getElementById("userName");
+const bookFile = document.getElementById("bookFile");
+const bookTitle = document.getElementById("bookTitle");
+const uploadBtn = document.getElementById("uploadBtn");
+const booksDiv = document.getElementById("books");
+
+/* STATE */
+let isLogin = true;
+let users = JSON.parse(localStorage.getItem("users") || "{}");
+let books = JSON.parse(localStorage.getItem("books") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+/* TOGGLE LOGIN / SIGNUP */
+toggleMode.onclick = () => {
+  isLogin = !isLogin;
+  authTitle.innerText = isLogin ? "Login" : "Sign Up";
+  nameInput.style.display = isLogin ? "none" : "block";
+  toggleMode.innerText = isLogin ? "Create an account" : "Already have an account?";
+};
+
+/* AUTH */
+authBtn.onclick = () => {
+  const matric = matricInput.value.trim();
+  const password = passwordInput.value;
+  const name = nameInput.value.trim();
+
+  if (!matric || !password || (!isLogin && !name))
+    return alert("Fill all fields");
+
+  if (isLogin) {
+    if (!users[matric] || users[matric].password !== password)
+      return alert("Invalid login");
+  } else {
+    if (users[matric]) return alert("Matric already exists");
+    users[matric] = { name, password };
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
+  localStorage.setItem("currentUser", JSON.stringify(users[matric]));
+  openLibrary(users[matric].name);
+};
+
+/* OPEN LIBRARY */
+function openLibrary(name){
+  authBox.style.display="none";
+  libraryPage.style.display="block";
+  userName.innerText=name;
+  renderBooks();
+}
+
+/* AUTO LOGIN */
+if (currentUser && currentUser.name) {
+  openLibrary(currentUser.name);
+}
+
+/* UPLOAD BOOK */
+uploadBtn.onclick = () => {
+  const file = bookFile.files[0];
+  const title = bookTitle.value;
+  if (!file || !title) return alert("Select PDF & title");
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    books.push({ title, data: reader.result });
+    localStorage.setItem("books", JSON.stringify(books));
+    renderBooks();
+  };
+  reader.readAsDataURL(file);
+};
+
+/* RENDER BOOKS */
+function renderBooks(){
+  booksDiv.innerHTML="";
+  books.forEach(b=>{
+    booksDiv.innerHTML += `
+      <div class="book">
+        <h4>${b.title}</h4>
+        <a href="${b.data}" download>Download PDF</a>
+      </div>`;
+  });
+}
+
+/* LOGOUT */
+function logout(){
+  localStorage.removeItem("currentUser");
+  location.reload();
+}
+</script>
+
+</body>
+</html>
