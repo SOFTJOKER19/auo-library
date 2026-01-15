@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | Physical Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/borrow.css">
+</head>
+<body>
+<div class="container">
+
+<h2>🛠️ Admin Dashboard</h2>
+
+<div class="admin-actions" style="margin:12px 0">
+	<button onclick="deleteAll()" style="background:#e85a4f">Delete All (books & requests)</button>
+</div>
+
+<h3>Add Book</h3>
+<div class="admin-row">
+	<input id="title" placeholder="Title">
+	<input id="author" placeholder="Author">
+	<input id="copies" type="number" placeholder="Copies">
+	<input id="department" placeholder="Department">
+	<input id="faculty" placeholder="Faculty">
+	<button onclick="addBook()">Add</button>
+</div>
+
+<h3>📚 Books</h3>
+<div id="adminBooks"></div>
+
+<h3>Borrow Requests</h3>
+<div id="adminRequests"></div>
+
+<script src="js/books.js"></script>
+<script src="js/admin.js"></script>
+</div>
+</body>
+</html>

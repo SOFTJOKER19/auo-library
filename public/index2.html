@@ -1,0 +1,45 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student | Physical Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/borrow.css">
+</head>
+<body>
+<div class="container">
+
+<h2> Available Physical Books</h2>
+<div id="bookList"></div>
+
+<h3> My Borrow Requests</h3>
+<div id="myRequests"></div>
+
+<!-- Student details collected in borrow modal; inline student inputs removed -->
+
+<!-- Borrow modal: collect student info then confirm -->
+<div id="confirmModal" class="modal" aria-hidden="true">
+	<div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+		<h3 id="confirmTitle">Borrow Book</h3>
+		<div id="confirmBookTitle" style="font-weight:700;margin-bottom:8px"></div>
+
+		<label for="confirmMatric">Matric number</label>
+		<input id="confirmMatric" placeholder="e.g. AUO/CSC/1234" style="width:100%;margin-bottom:8px">
+		<label for="confirmDepartment">Department</label>
+		<input id="confirmDepartment" placeholder="Department" style="width:100%;margin-bottom:8px">
+		<label for="confirmFaculty">Faculty</label>
+		<input id="confirmFaculty" placeholder="Faculty" style="width:100%;margin-bottom:12px">
+
+		<div style="margin-bottom:12px">Please confirm the student details above before submitting the borrow request.</div>
+		<div class="modal-actions">
+			<button id="confirmBtn" onclick="confirmBorrow()">Submit Request</button>
+			<button onclick="closeConfirm()" class="cancel">Cancel</button>
+		</div>
+	</div>
+</div>
+
+<script src="js/books.js"></script>
+<script src="js/student.js"></script>
+</div>
+</body>
+</html>
+</body>
+</html>
