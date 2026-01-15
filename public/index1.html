@@ -119,6 +119,14 @@ header span{color:var(--green)}
   text-decoration:none;
   align-items: center;
   font-weight:600;
+  cursor:pointer;
+  border:none;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.card a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(15,169,104,.3);
 }
 
 /* ANIMATION */
@@ -272,29 +280,28 @@ button{
     <div class="icon"></div>
     <h3>Borrow a Book</h3>
     <p>Request physical books easily</p>
-  <button> <a href="index2.html">Borrow</a></button>
+    <a href="index2.html" class="btn-link">Borrow</a>
   </div>
 
   <div class="card fade">
     <div class="icon"></div>
     <h3>E-Library</h3>
     <p>Read & download PDFs instantly</p>
-    <button><a href="#">Open</a></button>
+    <a href="#" class="btn-link">Open</a>
   </div>
 
   <div class="card fade">
     <div class="icon"></div>
     <h3>Find a Book</h3>
     <p>Search by title or author</p>
-   <button> <a href="#">Search</a></button>
+    <a href="#" class="btn-link">Search</a>
   </div>
 
   <div class="card fade">
     <div class="icon"></div>
     <h3>Borrow History</h3>
     <p>Track requests & due dates</p>
-    
-    <button><a href="#">View</a></button>
+    <a href="#" class="btn-link">View</a>
   </div>
 
   <div class="card fade">
@@ -302,13 +309,13 @@ button{
     <h3>Wishlist</h3>
     <p>Save books for later</p>
     <button><a href="#">Open</a></button>
-  </div>
+  </da href="#" class="btn-link">Open</a
 
   <div class="card fade">
     <div class="icon"></div>
     <h3>Feedback</h3>
     <p>Help improve the platform</p>
-   <button> <a href="#">Send</a></button>
+    <a href="#" class="btn-link">Send</a>
   </div>
 </section>
 
